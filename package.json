@@ -1,0 +1,8 @@
+{
+  "name": "simple-react-boilerplate",
+  "version": "1.0.0",
+  "description": "Simple React Boilerplate",
+  "main": "index.js",
+  "author": "Felipe Zinser",
+  "license": "MIT"
+}
