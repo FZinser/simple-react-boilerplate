@@ -1,38 +1,37 @@
-import React from 'react'
-// import Zinser from './zinser'
+import { compose, withState, withHandlers } from 'recompose'
 
-const Title = React.lazy(() => import('./zinser'))
+const Title = React.lazy(() => import(/* webpackChunkName:"LazyTitle" */ 'Components/Title'))
 
-class App extends React.Component {
-	state = {
-		count: 0		
-	}
+const enhancer = compose(
+	withState('count', 'updateCount', 0),
+	withHandlers({
+		increment: ({count, updateCount}) => () => {
+			updateCount(count + 1)
+		},
+		decrement: ({count, updateCount}) => () => {
+			updateCount(count - 1)	
+		}
+	})
+)
 
-	increment = () => {
-		this.setState(state => ({count: state.count + 1}))
-	}
+const App = enhancer(({count, increment, decrement}) =>  {
 
-	decrement = () => {
-		() => this.setState(state => ({count: state.count - 1}))
-	}
-
-	render() {
 		return (
 			<React.Fragment>
 				<h1>
-					{this.state.count > 5 ?
+					{count > 5 ?
 						<React.Suspense fallback={null}>
 							<Title name={'zinser'} />
 						</React.Suspense>
 						: null
 					}
 				</h1>
-				<h2>Count: {this.state.count}</h2>
-				<button onClick={this.increment}>ADD</button>
-				<button onClick={this.decrement}>MINUS</button>
+				<h2>Count: {count}</h2>
+				<button onClick={increment}>ADD</button>
+				<button onClick={decrement}>MINUS</button>
 			</React.Fragment>
 		)
-	}
-}
+	
+})
 
 export default App

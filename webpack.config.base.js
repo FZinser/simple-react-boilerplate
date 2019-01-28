@@ -1,11 +1,20 @@
 const path = require('path')
+const webpack = require('webpack')
+const rupture = require('rupture')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+	resolve: {
+		modules: [
+			path.resolve(__dirname, 'src'),
+			'node_modules'
+		]
+	},
 	entry: './src/index.js',
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'index.js'
+		filename: 'index.js',
+		chunkFilename: '[name].js'
 	},
 	module: {
 		rules: [
@@ -32,13 +41,19 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader'] ,
+				test: /\.styl$/,
+				use: 
+				[
+					{ loader: "style-loader" },
+					{ loader: "css-loader" },
+					{ loader: "stylus-loader", options: {use: [rupture()]} }
+				],
 				exclude: /node_modules/
 			}
 		]
 	},
-	plugins: [new HtmlWebpackPlugin({
-		template: 'src/index.html'
-	})]
+	plugins: [
+		new HtmlWebpackPlugin({template: 'src/index.html'}),
+		new webpack.ProvidePlugin({'React': 'react'})
+	]
 }
