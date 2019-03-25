@@ -1,5 +1,5 @@
 import { hydrate, render } from "react-dom"
-import App from './App'
+import {App} from './App'
 import '@babel/polyfill'
 import './main.styl'
 

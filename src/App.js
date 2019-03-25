@@ -1,11 +1,15 @@
-
 import Counter from 'Components/Counter'
+import {useState} from 'react'
 
-const App = () => {
+export const AppContext = React.createContext('app')
+
+export const App = () => {
+
+	let [state, setState] = useState({})
 
 	return (
-		<Counter />
+		<AppContext.Provider value={{state, setState}} >
+			<Counter />
+		</AppContext.Provider>	
 	)
 }
-
-export default App
