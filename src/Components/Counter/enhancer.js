@@ -1,6 +1,9 @@
 import { compose, withHandlers, withState, withEffect } from 'rvcompose'
+import { connect } from '../../Store'
 
 export default compose(
+
+    connect(),
 
     withState('count', 'updateCount', 0),
     
@@ -9,9 +12,11 @@ export default compose(
     }),
 
     withHandlers({
+        
         increment: ({ count, updateCount }) => (e) => {
             updateCount(count + 1)
         },
+
         decrement: ({ count, updateCount }) => (e) => {
             updateCount(count - 1)
         }

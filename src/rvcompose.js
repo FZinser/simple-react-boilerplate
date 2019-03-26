@@ -1,30 +1,27 @@
 import {useState, useEffect} from 'react'
 
 export const compose = (...args) => {
-    return Component => (props) => {
-        const fn = pipe.apply(null, args)
-        return Component( fn(props) )
+    return ( Component ) => (props) => {
+        const fn = pipe.apply( null, args )
+        const [cp, ps] = fn([ Component, props ])
+        return cp(ps)
     }
 }
 
-export const withState = ( name, namefn, value ) => ( props ) => {
+export const withState = ( name, namefn, value ) => ([ Component, props ]) => {
     const [variable, method] = useState( value ) 
-    return {
-        ...props, 
-        [name] :variable,
-        [namefn]:method
-    } 
+    return [Component, { ...props,  [name] :variable, [namefn]:method }] 
 }
 
-export const withHandlers = ( actions ) => ( props ) => {
+export const withHandlers = ( actions ) => ([ Component, props ]) => {
     for( let name in actions )
         props[ name ] = (e) => actions[ name ]( props )( e )
-    return props
+    return [Component, props]
 }
 
-export const withEffect = ( fn, option ) => ( props ) => {
+export const withEffect = ( fn, option ) => ([ Component, props ]) => {
     useEffect(() => fn(props), option)
-    return props
+    return [Component, props]
 }
 
 const pipe = (fn, ...fns) => (...args) => {

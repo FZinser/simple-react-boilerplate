@@ -1,15 +1,15 @@
 import Counter from 'Components/Counter'
-import {useState} from 'react'
+import {Store} from './Store'
 
-export const AppContext = React.createContext('app')
+const {Fragment} = React 
 
 export const App = () => {
 
-	let [state, setState] = useState({})
-
 	return (
-		<AppContext.Provider value={{state, setState}} >
-			<Counter />
-		</AppContext.Provider>	
+		<Store>
+			<Fragment> 
+				<Counter name="Zinser" />
+			</Fragment>
+		</Store>
 	)
 }
