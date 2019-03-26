@@ -3,10 +3,10 @@ import {App} from './App'
 import '@babel/polyfill'
 import './main.styl'
 
-const rootElement = document.getElementById('app');
+const rootElement = document.getElementById('app')
 
 if (rootElement.hasChildNodes()) {
-  hydrate(<App />, rootElement);
+	hydrate(<App />, rootElement)
 } else {
-  render(<App />, rootElement);
+	render(<App />, rootElement)
 }

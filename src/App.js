@@ -1,5 +1,5 @@
 import Counter from 'Components/Counter'
-import {Store} from './Store'
+import {Store} from './Stores'
 
 const {Fragment} = React 
 

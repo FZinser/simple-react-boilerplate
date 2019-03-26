@@ -20,7 +20,23 @@ export const withHandlers = ( actions ) => ([ Component, props ]) => {
 }
 
 export const withEffect = ( fn, option ) => ([ Component, props ]) => {
-    useEffect(() => fn(props), option)
+    const onlyUpdateforProps = (option || []).map( name => props[name] )
+    useEffect(() => fn(props), option? onlyUpdateforProps : null )
+    return [Component, props]
+}
+
+export const withTap = (fn) => ([Component, props]) => {
+    fn(props)
+    return [Component, props]
+}
+
+export const withMount = (fn) => ([Component, props]) => {
+    useEffect(() => { fn(props) }, [])
+    return [Component, props]
+}
+
+export const withWillUnmount = (fn) => ([Component, props]) => {
+    useEffect(() => () => fn(props), [])
     return [Component, props]
 }
 

@@ -1,14 +1,18 @@
-import { compose, withHandlers, withState, withEffect } from 'rvcompose'
-import { connect } from '../../Store'
+import { compose, withHandlers, withState, withMount, withWillUnmount } from 'rvcompose'
+import { connect } from '../../Stores'
 
 export default compose(
 
     connect(),
 
     withState('count', 'updateCount', 0),
-    
-    withEffect((props) => {
-        console.log('[Counter] => withEffect', props)
+
+    withMount(() => {
+        console.log('[Counter] - Mount')
+    }),
+
+    withWillUnmount(() => {
+        console.log('[Counter] - UnMount')
     }),
 
     withHandlers({
@@ -21,4 +25,5 @@ export default compose(
             updateCount(count - 1)
         }
     })
+
 )   
