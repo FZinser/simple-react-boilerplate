@@ -1,20 +1,20 @@
-import { useState, useContext } from 'react'
+// @Store
 
-const AppContext = React.createContext('app')
-
-export const Store = ({ children }) => {
-
-    const [state, setState] = useState({})
-
-    return (
-        <AppContext.Provider value={{ state, setState }} >
-            {children}
-        </AppContext.Provider>
-    )
+export const initialState = {
+    name : 'Zinser',
+    loading: false
 }
 
-export const connect = () => ([Component, props]) => {
-    const value = useContext(AppContext)
-    const newprops = { ...props, ...value }
-    return [Component, newprops]
+export const actions = {
+    
+    FETCH_STORIES :( state, payload, dispatch ) => {
+        fetch().then(({data}) => dispatch('READY', { data }))
+        return {
+            loading :true
+        }
+    },
+
+    READY :( state, payload ) => ({
+        loading :false 
+    })
 }
