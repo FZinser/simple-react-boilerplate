@@ -1,4 +1,5 @@
 import enhancer from './enhancer'
+import {Link} from 'react-router-dom'
 
 const {Fragment} = React
 const Title = React.lazy(() => import(/* webpackChunkName:"LazyTitle" */ 'Components/Title'))
@@ -7,6 +8,7 @@ const Counter = ({name, count, increment, decrement, updateName, ...props}) => {
 
     return (
         <Fragment>
+            <Link to='/zinserificador'>Zinserificador</Link>
             {count > 5 ? <AsyncTitle /> : <Fragment>
                 <h2> {name} Counter: {count}</h2>
                 <button onClick={increment}>ADD</button>
