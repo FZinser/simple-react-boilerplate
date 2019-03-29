@@ -9,6 +9,8 @@ const Counter = ({name, count, increment, decrement, updateName, ...props}) => {
     return (
         <Fragment>
             <Link to='/zinserificador'>Zinserificador</Link>
+            <Link to='/nayarificador'>Nayarificador</Link>
+            <Link to='/aragnificador'>Aragnificador</Link>
             {count > 5 ? <AsyncTitle /> : <Fragment>
                 <h2> {name} Counter: {count}</h2>
                 <button onClick={increment}>ADD</button>
