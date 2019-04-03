@@ -1,13 +1,13 @@
 import enhancer from './enhancer'
 import {Link} from 'react-router-dom'
+import { Fragment } from 'react'
 
-const {Fragment} = React
 const Title = React.lazy(() => import(/* webpackChunkName:"LazyTitle" */ 'Components/Title'))
 
 const Counter = ({name, count, increment, decrement, updateName, ...props}) => {
 
     return (
-        <Fragment>
+        <div className='counter-holder'>
             <Link to='/zinserificador'>Zinserificador</Link>
             <Link to='/nayarificador'>Nayarificador</Link>
             <Link to='/aragnificador'>Aragnificador</Link>
@@ -17,7 +17,7 @@ const Counter = ({name, count, increment, decrement, updateName, ...props}) => {
                 <button onClick={updateName}>SetState</button>
                 <button onClick={decrement}>MINUS</button>
             </Fragment>}
-        </Fragment>
+        </div>
     )   
 }
 

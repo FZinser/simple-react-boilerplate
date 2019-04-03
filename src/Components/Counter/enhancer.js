@@ -3,7 +3,7 @@ import { connect } from 'storable'
 
 export default compose(
 
-	connect(),
+	connect(['name']),
 
 	withState('count', 'updateCount', 0),
 
@@ -12,7 +12,7 @@ export default compose(
 	}),
 
 	withEffect((props) => {
-		console.log(props)
+		console.log(props, 'Counter')
 	}),
 
 	withWillUnmount(() => {
