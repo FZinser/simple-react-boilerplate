@@ -8,7 +8,7 @@ export default compose(
 	withState('todo', 'setTodo' , ''),
 
 	withMount((props) => {
-		console.log('[Counter] - Mount',)
+		console.log('[Counter] - Mount')
 	}),
 
 	withEffect((props) => {

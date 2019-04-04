@@ -1,4 +1,4 @@
-import { compose, withHandlers, withState, withMount, withWillUnmount, withEffect } from 'composable'
+import { compose, withHandlers, withState } from 'composable'
 import { getAragnificador } from 'Services/lambda-zinser'
 
 const enhancer = compose(
@@ -7,9 +7,9 @@ const enhancer = compose(
 
 	withHandlers({
 		submit: ({text, setAragnificador}) => (e) => {
-			e.preventDefault()
 			const result = getAragnificador(text)
-			result.then(({data}) => setAragnificador(data))
+			result.then( setAragnificador )
+			e.preventDefault()
 		}
 	})
 )

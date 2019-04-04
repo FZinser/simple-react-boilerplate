@@ -1,4 +1,3 @@
-import SubTitle from 'Components/SubTitle'
 import ImageTest from 'Images/Test-Logo.png'
 
 const Zinser = ({ name }) =>

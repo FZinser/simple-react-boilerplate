@@ -1,4 +1,3 @@
-import InputField from 'Components/InputField'
 import enhancer from './enhancer'
 import './index.styl'
 
