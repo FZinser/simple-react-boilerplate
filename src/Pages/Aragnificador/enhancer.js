@@ -1,6 +1,5 @@
 import { compose, withHandlers, withState, withMount, withWillUnmount, withEffect } from 'composable'
-import { getAragnificador } from 'Services/aragnificar'
-import {http} from 'Services/http'
+import { getAragnificador } from 'Services/lambda-zinser'
 
 const enhancer = compose(
 	withState('text', 'setText', ''),

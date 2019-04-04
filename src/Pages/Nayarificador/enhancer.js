@@ -1,6 +1,5 @@
 import { compose, withHandlers, withState, withMount, withWillUnmount, withEffect } from 'composable'
-import { getNayarificador } from 'Services/nayarificar'
-import {http} from 'Services/http'
+import { getNayarificador } from 'Services/lambda-zinser'
 
 const enhancer = compose(
 	withState('text', 'setText', ''),

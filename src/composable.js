@@ -26,7 +26,6 @@ export const withEffect = ( fn, option ) => ([ Component, props ]) => {
             item !== 'dispatch' ? acc.concat([props[item]]) : acc
         ),[]
     )
-
     useEffect(() => fn(props), onlyUpdateforProps)
     return [Component, props]
 }
