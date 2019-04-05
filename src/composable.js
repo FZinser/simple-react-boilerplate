@@ -21,12 +21,7 @@ export const withHandlers = ( actions ) => ([ Component, props ]) => {
 
 export const withEffect = ( fn, option ) => ([ Component, props ]) => {
     const options = (option || []).map( name => props[name] )
-    const onlyUpdateforProps = option ? options : Object.keys(props).reduce(
-        (acc,item) => (
-            item !== 'dispatch' ? acc.concat([props[item]]) : acc
-        ),[]
-    )
-    useEffect(() => fn(props), onlyUpdateforProps)
+    useEffect(() => fn(props), option ? options : null)
     return [Component, props]
 }
 
