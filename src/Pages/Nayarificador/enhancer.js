@@ -1,6 +1,5 @@
-import { compose, withHandlers, withState, withMount, withWillUnmount, withEffect } from 'composable'
-import { getNayarificador } from 'Services/nayarificar'
-import {http} from 'Services/http'
+import { compose, withHandlers, withState } from 'composable'
+import { getNayarificador } from 'Services/lambda-zinser'
 
 const enhancer = compose(
 	withState('text', 'setText', ''),
@@ -10,7 +9,7 @@ const enhancer = compose(
 		submit: ({text, setNayarificador}) => (e) => {
 			e.preventDefault()
 			const result = getNayarificador(text)
-			result.then(({data}) => setNayarificador(data))
+			result.then( setNayarificador )
 		}
 	})
 )

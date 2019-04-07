@@ -1,9 +1,10 @@
-import InputField from 'Components/InputField'
 import enhancer from './enhancer'
 import './index.styl'
+import {Link} from 'react-router-dom'
 
 const Nayarificador = ({submit, setText, text, Nayarificador}) => (
 	<div className="Nayarificador-holder">
+		<Link className='link' to='/'>Home</Link>
 		<div className="container">
 			<form onSubmit={submit} className="Nayarificador-form">
 				<input type="text" name="text" id="text"

@@ -20,8 +20,8 @@ export const withHandlers = ( actions ) => ([ Component, props ]) => {
 }
 
 export const withEffect = ( fn, option ) => ([ Component, props ]) => {
-    const onlyUpdateforProps = (option || []).map( name => props[name] )
-    useEffect(() => fn(props), option? onlyUpdateforProps : null )
+    const options = (option || []).map( name => props[name] )
+    useEffect(() => fn(props), option ? options : null)
     return [Component, props]
 }
 

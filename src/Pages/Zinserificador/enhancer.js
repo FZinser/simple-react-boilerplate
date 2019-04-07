@@ -1,16 +1,16 @@
-import { compose, withHandlers, withState, withMount, withWillUnmount, withEffect } from 'composable'
-import { getZinserificado } from 'Services/zinserificar'
-import {http} from 'Services/http'
+import { compose, withHandlers, withState } from 'composable'
+import { getZinserificador } from 'Services/lambda-zinser'
 
 const enhancer = compose(
+	
 	withState('text', 'setText', ''),
 	withState('zinserificado', 'setzinserificado', ''),
 
 	withHandlers({
 		submit: ({text, setzinserificado}) => (e) => {
+			const result = getZinserificador(text)
+			result.then( setzinserificado )
 			e.preventDefault()
-			const result = getZinserificado(text)
-			result.then(({data}) => setzinserificado(data))
 		}
 	})
 )
