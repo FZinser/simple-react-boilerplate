@@ -1,24 +1,22 @@
 import enhancer from './enhancer'
-import { Link } from 'react-router-dom'
-import { Fragment, memo } from 'react'
 import Input from 'Components/InputField'
 
-
-
-const TodoList = ({addThing, things, setInput, todo, ...props}) => {
+const TodoList = ({addThing, state, setInput, todo }) => {
     return (
         <div className='todo-holder'>
             <Input onChange={setInput} value={todo}/>
             <button onClick={addThing}>Adicionar</button>
-            <ul>
-                {
-                    things.map( (item, index) => (
-                        <li key={index}>{item}</li>
-                    ))
-                }
-            </ul>
+            <Items list={state.todo} />
         </div>
     )   
 }
 
-export default enhancer(TodoList)
+const Items = ({ list }) => {
+    return (
+        <ul>
+            { list.map((item, index) => ( <li key={index}>{item}</li>) ) }
+        </ul>
+    )
+}
+
+export default enhancer( TodoList )

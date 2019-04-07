@@ -1,5 +1,5 @@
 import { compose, withHandlers, withState } from 'composable'
-import { getNayarificador } from 'Services/lambda-zinser'
+import { getZinserLambda } from '../../Services/lambda-zinser'
 
 const enhancer = compose(
 	withState('text', 'setText', ''),
@@ -8,7 +8,7 @@ const enhancer = compose(
 	withHandlers({
 		submit: ({text, setNayarificador}) => (e) => {
 			e.preventDefault()
-			const result = getNayarificador(text)
+			const result = getZinserLambda('/nayarificador', text)
 			result.then( setNayarificador )
 		}
 	})

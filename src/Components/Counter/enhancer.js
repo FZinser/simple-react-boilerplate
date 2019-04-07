@@ -1,23 +1,11 @@
-import { compose, withHandlers, withState, withMount, withWillUnmount, withEffect } from 'composable'
+import { compose, withHandlers, withState } from 'composable'
 import { connect } from 'storable'
 
 export default compose(
-
-	connect(['name']),
+	
+	connect(),
 
 	withState('count', 'updateCount', 0),
-
-	withMount((props) => {
-		console.log('[Counter] - Mount',)
-	}),
-
-	withEffect((props) => {
-		console.log(props, 'Counter')
-	}),
-
-	withWillUnmount(() => {
-		console.log('[Counter] - UnMount')
-	}),
 
 	withHandlers({
 		
@@ -29,8 +17,9 @@ export default compose(
 			updateCount(count - 1)
 		},
 
-		updateName: ({ dispatch }) => (e) => {
-			dispatch('CHANGE', { key:'name', value:null })
+		updateName: ({ dispatch, state }) => (e) => {
+			const lastItem = state.todo[state.todo.length - 1]
+			dispatch({ type: 'CHANGE_NAME', payload:lastItem })
 		}
 	})
 
