@@ -10,5 +10,19 @@
 		<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 		<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 		<% } %>
+		<script type="text/javascript">
+			!(function(){
+				var request = new XMLHttpRequest();
+				request.onload = function(e) {
+					var wrapper = document.createElement('div');
+					wrapper.id = 'svg-sprite';
+					wrapper.innerHTML = request.responseText;
+					wrapper.style.display = 'none';
+					document.body.insertBefore(wrapper, document.body.childNodes[0]);
+				};
+				request.open("GET", 'images/icons/sprite.svg', true);
+				request.send();
+			})();
+		</script>
 	</body>
 </html>

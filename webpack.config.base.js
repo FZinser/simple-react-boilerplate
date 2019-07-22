@@ -5,6 +5,7 @@ const rupture = require('rupture')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 
 module.exports = {
 	resolve: {
@@ -16,6 +17,7 @@ module.exports = {
 	entry: './src/index.js',
 	output: {
 		path: path.join(__dirname, 'dist'),
+		publicPath: '/',
 		filename: 'index.[hash].js',
 		chunkFilename: '[name].[hash].js'
 	},
@@ -25,7 +27,16 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: devMode ? '[name].css' : '[name].[hash].css',
 			chunkFilename: "[id].[hash].css"
-		})
+		}),
+		new SVGSpritemapPlugin([
+				'./src/Images/icons/*.svg',
+				'./src/Images/icons/**/*.svg'
+			], {
+				output: {
+					filename: 'images/icons/sprite.svg'
+				},
+				sprite: { prefix: false }
+			})
 	],
 	module: {
 		rules: [
