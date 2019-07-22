@@ -1,5 +1,6 @@
 import Counter from 'Components/Counter'
 import TodoList from 'Components/TodoList'
+import StoreEnhancer from 'Store/enhancer'
 
 import './index.styl'
 
@@ -9,7 +10,7 @@ const Home = () => (
 			<Counter />
 			<TodoList />
 		</div>
-	</div>	
+	</div>
 )
 
-export default Home
+export default StoreEnhancer(Home)

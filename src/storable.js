@@ -1,37 +1,29 @@
-import { useState, useContext } from 'react'
+import { useReducer, useContext } from 'react'
 
-const AppContext = React.createContext('app')
+const Context = React.createContext()
 
-export const Store = ({ children, state, actions }) => {
-
-    const [ store, setStore ] = useState( state || {})
-
+export const Store = ({ children, initialState, reducer }) => {
+    const [state, dispatch] = useReducer( reducer, initialState )
     return (
-        <AppContext.Provider value={{ store, setStore, actions }} >
+        <Context.Provider value={{ state, dispatch }}>
             {children}
-        </AppContext.Provider>
+        </Context.Provider>
     )
 }
 
-export const connect = (keys = []) => ([Component, props]) => {
+export const connect = () => ([ Component, props ]) => {
+    const context = useContext( Context )
+    return [ Component, { ...props, ...context } ]
+}
+
+// https://egghead.io/lessons/react-redux-implementing-combinereducers-from-scratch
+export const combineReducers = ( reducers ) => (state = {}, action) => {
+    // A particular case for acessing entire state from Store
+    if( action.type == 'SET' )
+        return action.payload
     
-    const value = useContext( AppContext )
-    const {setStore, actions, store} = value
-
-    const dispatch = ( action, payload ) => {
-        const newstate = actions[action](store, payload, dispatch)
-        setStore({ ...store, ...newstate })
-    }
-
-    //Default Actions
-    actions.CHANGE = (state, payload) => ({ [payload.key]: payload.value })
-    actions.RESET = (state, payload) => ({ [payload.key]: null })
-
-    const onlySelectedKeys = keys.reduce(
-        (acc, key) => ({ ...acc, [key]: store[key] })
-    ,{ dispatch })
-
-    const newprops = { ...props, ...onlySelectedKeys }
-    
-    return [Component, newprops]
+    return Object.keys( reducers ).reduce((nextState, key) => {
+        nextState[key] = reducers[key]( state[key], action )
+        return nextState
+    }, {})
 }
