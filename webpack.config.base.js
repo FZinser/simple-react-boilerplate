@@ -18,15 +18,23 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'dist'),
 		publicPath: '/',
-		filename: 'index.[hash].js',
-		chunkFilename: '[name].[hash].js'
+		filename: 'js/index.[hash].js',
+		chunkFilename: 'js/[name].[hash].js'
+	},
+	optimization: {
+		splitChunks: {
+			chunks: 'all',
+		}
+	},
+	devServer: {
+		historyApiFallback: true
 	},
 	plugins: [
 		new HtmlWebpackPlugin({template: 'src/index.html'}),
 		new webpack.ProvidePlugin({'React': 'react'}),
 		new MiniCssExtractPlugin({
-			filename: devMode ? '[name].css' : '[name].[hash].css',
-			chunkFilename: "[id].[hash].css"
+			filename: devMode ? 'styl/[name].css' : 'styl/[name].[hash].css',
+			chunkFilename: "styl/[id].[hash].css"
 		}),
 		new SVGSpritemapPlugin([
 				'./src/Images/icons/*.svg',
