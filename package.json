@@ -6,7 +6,8 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "rm -rf dist/ && NODE_ENV=production webpack --config webpack.config.prod.js",
-		"start": "webpack-dev-server --host=0.0.0.0 --config webpack.config.dev.js"
+		"start": "webpack-dev-server --host=0.0.0.0 --config webpack.config.dev.js",
+		"server": "yarn build && cd dist && python -m SimpleHTTPServer 2222"
 	},
 	"reactSnap": {
 		"source": "dist",
