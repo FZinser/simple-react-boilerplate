@@ -5,6 +5,7 @@ module.exports = merge(baseConfig, {
 	mode: 'development',
 	devServer: {
 		port: 8080,
-		historyApiFallback: true
+		historyApiFallback: true,
+		host: '0.0.0.0'
 	}
 })
